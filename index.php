@@ -63,12 +63,13 @@ function find_item_by_title(PDO $pdo, string $keyword): array
 	<?php foreach ($items as $item): ?>  
   	<p><?= $item['name']. " item" ?></p>
 	<a href="item.php?id=<?=$item['id']?>"><img src="images/<?=$item['image']; ?>" class="photo_item" ></a>
+	<a href="add_item.php?id=<?=$item['id']?>">Купить</a>
  <?php endforeach; ?>
 
 	<?php foreach($posts as $post): ?>
 	<h3> <?= $post['name']; ?> </h3>
 	<a href="item.php?id=<?=$post['id']?>"><img src="images/<?=$post['image']; ?>" class="photo_item" ></a>
-
+	<a href="add_item.php?id=<?=$item['id']?>">Купить</a>
 	<?php endforeach; ?>
 
 </body>

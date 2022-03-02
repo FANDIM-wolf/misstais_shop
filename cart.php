@@ -48,10 +48,11 @@ echo $current_user;
 	 ?>
 
   	<h3><?= $item['name']. " item" ?></h3>
-	<p>Количество:<?= $item['quantity'] ?></p>
-	<p>Цена:<?= $item['price'] ?></p>
+	<p>Количество:<?= $item['quantity']  ?></p>
+	<p>Цена:<?= $item['price']  * $item['quantity']?></p>
 	<a href="item.php?id=<?=$item['id']?>"><img src="images/<?=$item['image']; ?>" class="photo_item" ></a>
-	<a href="basket.php?id=<?=$item['id']?>">Купить</a>
+	<a href="add_item.php?id=<?=$item['id']?>">Добавить</a>
+	<a href="remove_item.php?id=<?=$item['id']?>">Убрать</a>
  <?php endforeach; ?>
 
 

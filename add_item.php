@@ -1,5 +1,7 @@
 <?php 
 //add item function , firtstly determine user 
+
+$process_finished = false ;
 $add_item  = $_GET['id'];
 $current_user = $_COOKIE["user"];	
 echo "id".$add_item."name:".$current_user;
@@ -16,20 +18,37 @@ $statement->bindParam(":id" , $add_item);
 $statement->execute();
 
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+ foreach ($result as $result) {
+ 	$result["quantity"];
+ }
+ 
 
 //if there is item  in db , add +1 to quantity column
 if(!empty($result)){
-	$quantity = $result['quantity'];
-	$quantity = $quantity+1;
-	echo "there is";
-	$sql ="UPDATE `orders` SET`quantity`=:quantity WHERE name_of_user = :name_of_user AND id_of_good = :id_of_good";
-$statement_update =  $pdo->prepare($sql);
-$statement_update->bindParam(":quantity" , $quantity);
-$statement_update->bindParam(":name_of_user" , $current_user);
-$statement_update->bindParam(":id_of_good" , $add_item);	
-$statement_update->execute();
+	$quantity = $result["quantity"];
+	$quantity = $quantity + 1;
+	echo $quantity;
+
+	$sql_update ="UPDATE orders SET quantity =:quantity  WHERE name_of_user = :name_of_user AND id_of_good = :id_of_good";
+$statement_update =  $pdo->prepare($sql_update);
+
+$statement_update->execute([':name_of_user' => $current_user , ':quantity' => $quantity , 'id_of_good' => $add_item]);
+$process_finished = true;
+	if($process_finished == true){
+	header("Location:/misstais_shop/cart.php");
+	}
 }
 else{
+
+	$sql_update ="INSERT INTO `orders`( `name_of_user`, `id_of_good`, `quantity`) VALUES (:name_of_user,:id_of_good,1)";
+$statement_update =  $pdo->prepare($sql_update);
+
+$statement_update->execute([':name_of_user' => $current_user , 'id_of_good' => $add_item]);
+$process_finished = true;
+	if($process_finished == true){
+	header("Location:/misstais_shop/cart.php");
+	}
+
 	echo "there isn't";
 }
 print_r($result)
