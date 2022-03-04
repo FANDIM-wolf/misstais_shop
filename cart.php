@@ -44,7 +44,7 @@ echo $current_user;
 	?>
 	<?php foreach ($posts as $item): ?>  
 	 <?php $cart = 2 * $item['price']; 
-	 	echo $cart;
+	 	//echo $cart;
 	 ?>
 
   	<h3><?= $item['name']. " item" ?></h3>

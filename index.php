@@ -1,19 +1,5 @@
 <?php header('Content-Type: text/html; charset=utf-8');?>
-<?php 
-function find_item_by_title(PDO $pdo, string $keyword): array
-{
-    $pattern = '%' . $keyword . '%';
 
-    $sql = 'SELECT *
-        FROM items 
-        WHERE name LIKE :pattern';
-
-    $statement = $pdo->prepare($sql);
-    $statement->execute([':pattern' => $pattern]);
-
-    return  $statement->fetchAll(PDO::FETCH_ASSOC);
-}
-?>
 
 <!DOCTYPE html>
 <html>
@@ -25,18 +11,215 @@ function find_item_by_title(PDO $pdo, string $keyword): array
 	<meta charset="UTF-8">
 	<title></title>
 </head>
-<a href="registration.php">Sign up</a>
+<style type="text/css">
+.wrapper {
+		margin-top: 10px;
+		text-align: center; /*располагаем содержимое блока по центру*/
+		
+	}
+.box {
+display: inline-block; /*располагаем блоки в ряд по горизонтали*/
+/*убираем правый отступ между блоками*/
+margin-right: 195px;
+font-weight: 400;
+}
+#boxs{
+	margin-top:5px;
+}
+
+a{
+	font-family: 'Montserrat', sans-serif;
+	text-decoration: none;
+	color:black;
+}
+
+
+
+
+
+.item_box{
+	/*width: 300px;
+	height: 25px;
+	border-radius: 8px;
+	border-color: black;
+
+	*/
+	border:none;
+	width: 300px;
+	height:25px;
+
+}
+.elements{
+	width:400px;
+  height:35px;
+  border: solid black 1px;
+  border-radius:8px;
+}
+.elements:hover{
+	width:400px;
+  height:35px;
+  border: solid black 1px;
+  border-radius:8px;
+
+}
+body{
+	
+	font-family: 'Montserrat', sans-serif;
+}
+
+
+
+.photo_item{
+	width: 250px;
+	height: 250px;
+
+}
+.photo_item_pro{
+	width: 350px;
+	height: 350px;
+}
+.description{
+	max-width: 700px;
+	display: flex;
+	font-size: 25px;
+	font-family: 'Montserrat', sans-serif;
+
+}
+.head_goods{
+display: grid; /*располагаем блоки в ряд по горизонтали*/
+grid-template-columns: 400px 400px 400px;
+margin-left: 10%;
+/*убираем правый отступ между блоками*/
+	
+}
+.image_logo{
+	width:20px;
+	height:20px;
+	
+}
+.image_logo:hover{
+	width:20px;
+	height:20px;
+
+}
+.photo_panel{
+	width:20px;
+	height:20px;
+}
+
+/* Слайдер */
+.slider{
+    max-width: 60%;
+    position: relative;
+    margin: auto;
+    height: 300px;
+	margin-top:3%;
+}
+/* Картинка масштабируется по отношению к родительскому элементу */
+.slider .item img {
+    object-fit: cover;
+    width: 100%;
+    height: 350px;
+}
+/* Кнопки вперед и назад */
+.slider .previous, .slider .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: 22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+.slider .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+/* При наведении на кнопки добавляем фон кнопок */
+.slider .previous:hover,
+.slider .next:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+/* Анимация слайдов */
+.slider .item {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+@keyframes fade {
+    from {
+        opacity: 0.4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+</style>
 <body>
-	<form method="GET">
-	<input type="text" name="item_name" placeholder="Введите названия продукта">
-	<input type="submit" >
+
+
+<div class="wrapper">
+<div class="box" id="boxa">
+
+
+	<a href="/misstais_shop" ><img    src="files_for_front/logo.png"></a>
+
+</div>
+<div class="box">
+	<form method="GET" action="search.php" name="search">
+	<input type="text" name="item_name" class="item_box"  placeholder="Введите названия продукта" onclick="if (event.keyCode == 13) document.search.submit();">
+	<input type="image" value="" src="files_for_front/loupe.png" class="image_logo" >
+	
 	</form>
+</div>
+
+<div class="box" id="boxs">
 	<?php if($_COOKIE["user"] != " "){ ?>
     	<?php echo $_COOKIE["user"] ?>
 	<?php } ?>
 	<?php if(isset($_COOKIE["user"]) == false){?>
-		 <p>login</p>
-	<?php } ?>	
+		<a  href="registration.php">Sign up</a>
+	<?php } ?>
+
+	<a href="cart.php"><img class="photo_panel" src="files_for_front/shopping-cart.png"></a>
+	<a href="cart.php"><img class="photo_panel" src="files_for_front/user.png"></a>
+	<a href="cart.php"><img class="photo_panel" src="files_for_front/heart.png"></a>
+</div>
+</div>
+	
+
+
+
+	
+	
+	<!-- Основной блок слайдера -->
+<div class="slider">
+  
+  <!-- Первый слайд -->
+  <div class="item">
+	  <img src="files_for_front/image1.png">
+	 
+  </div>
+
+  <!-- Второй слайд -->
+  <div class="item">
+	  <img src="https://s3.tproger.ru/uploads/2020/07/rose.jpg">
+  </div>
+
+  <!-- Третий слайд -->
+  <div class="item">
+	  <img src="https://s3.tproger.ru/uploads/2020/07/leaf.jpg">
+  </div>
+
+  <!-- Кнопки-стрелочки -->
+  <a class="previous" onclick="previousSlide()">&#10094;</a>
+  <a class="next" onclick="nextSlide()">&#10095;</a>
+</div>
+<br>
 	<?php 
 	
 	
@@ -44,33 +227,29 @@ function find_item_by_title(PDO $pdo, string $keyword): array
 	$huruf= $pdo->query("SET NAMES 'utf8'");
 	$huruf2= $pdo->query("SET CHARACTER SET 'utf8'");
 	$huruf3= $pdo->query("SET SESSION collation_connection = 'utf8_general_ci'");
-	$sql ="SELECT * FROM items";
+	$sql ="SELECT  * FROM items WHERE price > 200 ";
 	$statement =  $pdo->prepare($sql);
 	$statement->execute(); 
 
-	$name_of_item = $_GET['item_name'];
-	echo $name_of_item;
-	if(!empty($_GET['item_name'])){
-   	$items = find_item_by_title($pdo , $name_of_item);
-	//print_r($items);
-
-	}
+	
 
 	
 	
 	$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 	?>
-	<?php foreach ($items as $item): ?>  
-  	<p><?= $item['name']. " item" ?></p>
-	<a href="item.php?id=<?=$item['id']?>"><img src="images/<?=$item['image']; ?>" class="photo_item" ></a>
-	<a href="add_item.php?id=<?=$item['id']?>">Купить</a>
- <?php endforeach; ?>
 
+	<br>
+	<div class="head_goods"> 
+	
 	<?php foreach($posts as $post): ?>
+	<div>
 	<h3> <?= $post['name']; ?> </h3>
 	<a href="item.php?id=<?=$post['id']?>"><img src="images/<?=$post['image']; ?>" class="photo_item" ></a>
-	<a href="add_item.php?id=<?=$item['id']?>">Купить</a>
+	<a href="add_item.php?id=<?=$post['id']?>">Купить</a>
+	</div>
 	<?php endforeach; ?>
-
+	
+</div>
+	<script src="scripts/slider.js"></script>
 </body>
 </html>
