@@ -44,10 +44,15 @@ if($_GET['login_name'] != " " ){
 
 }		
 
-
-
 	
 ?>
+
+<?php 
+if($_COOKIE["user"] != " " ){
+ ?>
+ 	<h3>Вы успешно авторизировались</h3> 
+ 	<a href="/misstais_shop" > Перейти на главную </a>
+ <?php } ?>
 
 </body>
 </html>

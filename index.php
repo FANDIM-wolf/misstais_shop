@@ -15,12 +15,12 @@
 .wrapper {
 		margin-top: 10px;
 		text-align: center; /*располагаем содержимое блока по центру*/
-		
+		margin-left:70px;
 	}
 .box {
 display: inline-block; /*располагаем блоки в ряд по горизонтали*/
 /*убираем правый отступ между блоками*/
-margin-right: 195px;
+margin-right: 230px;
 font-weight: 400;
 }
 #boxs{
@@ -107,13 +107,19 @@ margin-left: 10%;
 	height:20px;
 }
 
+.slide_image{
+	border-radius: 15px;
+}
+
 /* Слайдер */
 .slider{
-    max-width: 60%;
+    max-width: 70%;
     position: relative;
     margin: auto;
     height: 300px;
 	margin-top:3%;
+	margin-left:10%;
+	
 }
 /* Картинка масштабируется по отношению к родительскому элементу */
 .slider .item img {
@@ -181,12 +187,12 @@ margin-left: 10%;
 	<?php if($_COOKIE["user"] != " "){ ?>
     	<?php echo $_COOKIE["user"] ?>
 	<?php } ?>
-	<?php if(isset($_COOKIE["user"]) == false){?>
+	<?php if(isset($_COOKIE["user"]) == false || $_COOKIE["user"] == " "){?>
 		<a  href="registration.php">Sign up</a>
 	<?php } ?>
 
 	<a href="cart.php"><img class="photo_panel" src="files_for_front/shopping-cart.png"></a>
-	<a href="cart.php"><img class="photo_panel" src="files_for_front/user.png"></a>
+	<a href="user.php"><img class="photo_panel" src="files_for_front/user.png"></a>
 	<a href="cart.php"><img class="photo_panel" src="files_for_front/heart.png"></a>
 </div>
 </div>
@@ -201,18 +207,18 @@ margin-left: 10%;
   
   <!-- Первый слайд -->
   <div class="item">
-	  <img src="files_for_front/image1.png">
+	  <img src="files_for_front/image1.png" class="slide_image" >
 	 
   </div>
 
   <!-- Второй слайд -->
   <div class="item">
-	  <img src="https://s3.tproger.ru/uploads/2020/07/rose.jpg">
+	  <img src="https://s3.tproger.ru/uploads/2020/07/rose.jpg" class="slide_image">
   </div>
 
   <!-- Третий слайд -->
   <div class="item">
-	  <img src="https://s3.tproger.ru/uploads/2020/07/leaf.jpg">
+	  <img src="https://s3.tproger.ru/uploads/2020/07/leaf.jpg" class="slide_image">
   </div>
 
   <!-- Кнопки-стрелочки -->
