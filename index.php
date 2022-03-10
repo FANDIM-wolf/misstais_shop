@@ -72,6 +72,7 @@ body{
 .photo_item{
 	width: 250px;
 	height: 250px;
+	border-radius: 15px;
 
 }
 .photo_item_pro{
@@ -188,7 +189,7 @@ margin-left: 10%;
     	<?php echo $_COOKIE["user"] ?>
 	<?php } ?>
 	<?php if(isset($_COOKIE["user"]) == false || $_COOKIE["user"] == " "){?>
-		<a  href="registration.php">Sign up</a>
+		<a  href="authorization.php">Sign in</a>
 	<?php } ?>
 
 	<a href="cart.php"><img class="photo_panel" src="files_for_front/shopping-cart.png"></a>
@@ -245,14 +246,19 @@ margin-left: 10%;
 	?>
 
 	<br>
+	<br>
 	<div class="head_goods"> 
 	
 	<?php foreach($posts as $post): ?>
 	<div>
-	<h3> <?= $post['name']; ?> </h3>
+	
 	<a href="item.php?id=<?=$post['id']?>"><img src="images/<?=$post['image']; ?>" class="photo_item" ></a>
-	<a href="add_item.php?id=<?=$post['id']?>">Купить</a>
+	<br>
+	<p><b><?= $post['price']; ?>RUB </b></p>
+	<a href="add_item.php?id=<?=$post['id']?>"><?= $post['name']; ?></a>
+
 	</div>
+
 	<?php endforeach; ?>
 	
 </div>

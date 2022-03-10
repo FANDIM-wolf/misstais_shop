@@ -46,6 +46,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=misstais_shop; charset=utf8" , "mik
 		$cookie_name = "user";
 		$cookie_value = $name;
 		setcookie($cookie_name, $cookie_value, time() + (31104000 * 30), ); // 86400 = 1 day
+		header("Location:/");
 
 	}
 	

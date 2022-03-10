@@ -24,7 +24,7 @@ echo $current_user;
 
 <?php 
 	
-
+	$total_price = 0;
 	
 	$pdo = new PDO("mysql:host=localhost; dbname=misstais_shop" , "mikael" , "elkin");
 	$huruf= $pdo->query("SET NAMES 'utf8'");
@@ -45,16 +45,24 @@ echo $current_user;
 	<?php foreach ($posts as $item): ?>  
 	 <?php $cart = 2 * $item['price']; 
 	 	//echo $cart;
+	 
+	 	$total_price += $item['price'] * $item["quantity"];
 	 ?>
 
-  	<h3><?= $item['name']. " item" ?></h3>
+  	<h3><?=  $item['name']. " item" ?></h3>
 	<p>Количество:<?= $item['quantity']  ?></p>
 	<p>Цена:<?= $item['price']  * $item['quantity']?></p>
 	<a href="item.php?id=<?=$item['id']?>"><img src="images/<?=$item['image']; ?>" class="photo_item" ></a>
 	<a href="add_item.php?id=<?=$item['id']?>">Добавить</a>
 	<a href="remove_item.php?id=<?=$item['id']?>">Убрать</a>
- <?php endforeach; ?>
 
-		<a href="payment_pay.php">Оплатить</a>
+	 <?php endforeach; ?>
+	<br>
+	<br>
+	<?php
+
+	echo "Итоговая цена".$total_price;
+	 ?>
+
 </body>
 </html>
