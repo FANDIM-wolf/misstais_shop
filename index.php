@@ -255,7 +255,7 @@ margin-left: 10%;
 	<a href="item.php?id=<?=$post['id']?>"><img src="images/<?=$post['image']; ?>" class="photo_item" ></a>
 	<br>
 	<p><b><?= $post['price']; ?>RUB </b></p>
-	<a href="add_item.php?id=<?=$post['id']?>"><?= $post['name']; ?></a>
+	
 
 	</div>
 

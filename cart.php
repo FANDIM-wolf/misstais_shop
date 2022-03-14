@@ -46,15 +46,18 @@ echo $current_user;
 	 <?php $cart = 2 * $item['price']; 
 	 	//echo $cart;
 	 ?>
-
+	 <?php if($item['paid_order'] != 1){ ?>
   	<h3><?= $item['name']. " item" ?></h3>
-	<p>Количество:<?= $item['quantity']  ?></p>
-	<p>Цена:<?= $item['price']  * $item['quantity']?></p>
-	<a href="item.php?id=<?=$item['id']?>"><img src="images/<?=$item['image']; ?>" class="photo_item" ></a>
-	<a href="add_item.php?id=<?=$item['id']?>">Добавить</a>
-	<a href="remove_item.php?id=<?=$item['id']?>">Убрать</a>
+	<h4>Количество:<?= $item['quantity']  ?></h4>
+	<h4>Цвет:<?= $item['color']  ?></h4>
+	<h4>Цена:<?= $item['price']  * $item['quantity']?></h4>
+	
+	<a href="add_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>">Добавить</a>
+	<a href="remove_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>">Убрать</a>
+	<?php } ?>
  <?php endforeach; ?>
 
 		<a href="payment_pay.php">Оплатить</a>
+
 </body>
 </html>

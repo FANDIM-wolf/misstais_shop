@@ -47,7 +47,8 @@ header('Content-Type: text/html; charset=utf-8');?>
 	
 	//print_r($items);
 
-
+	//color of item
+	$color = " ";
 
 	
 	
@@ -69,6 +70,10 @@ header('Content-Type: text/html; charset=utf-8');?>
 	<?php foreach($posts as $post): ?>
 	<b><p><?= $post['price']; ?> РУБ</p></b>	
 	<h2> <?= $post['description']; ?> </h2>
+
+
+	<a href="add_item.php?id=<?=$post['id']?>&color=<?=$color?>">Купить</a>
+
 
 	<?php endforeach; ?>
 	<form method="POST" action="send_comment.php?id=<?=$_GET['id']?>" name="form_create_comment">
