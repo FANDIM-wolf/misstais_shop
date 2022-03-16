@@ -27,14 +27,17 @@ header('Content-Type: text/html; charset=utf-8');?>
 	$huruf3= $pdo->query("SET SESSION collation_connection = 'utf8_general_ci'");
 	$sql ="SELECT * FROM items WHERE id=".$var_id_of_item;
 	$sql_get_additinal_photos = "SELECT * FROM photos WHERE item_id=".$var_id_of_item;
+	$sql_colors = "SELECT * FROM colors WHERE id_item=".$var_id_of_item;
+	$statement_colors = $pdo->prepare($sql_colors);
 	$statement =  $pdo->prepare($sql);
 	$statement_get_additional_photos = $pdo->prepare($sql_get_additinal_photos);
 	$statement_get_additional_photos->execute();
 	$statement->execute(); 
-
+	$statement_colors->execute();
 	$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 	$photos = $statement_get_additional_photos->fetchAll(PDO::FETCH_ASSOC);
-
+	$colors = $statement_colors->fetchAll(PDO::FETCH_ASSOC);
+	
 	//show comments for this item
 	
 	
@@ -48,15 +51,17 @@ header('Content-Type: text/html; charset=utf-8');?>
 	//print_r($items);
 
 	//color of item
-	$color = " ";
-
-	
-	
+	$color = "default";
+	if($_GET["color"] != " "){
+	$color = $_GET["color"];
+	echo $_GET['color'] ."Selected color";
+	}
 	$comments = $statement_comments->fetchAll(PDO::FETCH_ASSOC);
 	
 
 	?>
 
+	
 	<?php foreach($posts as $post): ?>
 	<h3> <?= $post['name']; ?> </h3>
 	<img src="images/<?=$post['image']; ?>" class="photo_item_pro" >
@@ -70,8 +75,15 @@ header('Content-Type: text/html; charset=utf-8');?>
 	<?php foreach($posts as $post): ?>
 	<b><p><?= $post['price']; ?> РУБ</p></b>	
 	<h2> <?= $post['description']; ?> </h2>
+	<?php $post_id_selected = $post['id']; ?>
 
-
+	<form name="color" method="GET" action="item.php?id=$post_id_selected&color=$color">
+		<input type="hidden" name="id" value="<?=$post_id_selected?>">
+		<?php foreach($colors as $item_color): ?>
+		<input type="radio" name="color" value="<?=$item_color["color"] ?>"><?=$item_color["color"] ?></input>
+		<?php endforeach; ?>
+		<input type="submit" value="Выберете цвет" >
+	</form>
 	<a href="add_item.php?id=<?=$post['id']?>&color=<?=$color?>">Купить</a>
 
 

@@ -23,12 +23,12 @@ $statement_insert->execute([':name' => $current_user , 'order_status' => 0 , "to
 
 $process_finished = true;
 
-$sql_update ="UPDATE orders SET paid_order =:paid_order  WHERE name_of_user = :name_of_user " ;
+$sql_update ="UPDATE orders_history SET paid_order =:paid_order  WHERE name_of_user = :name_of_user  " ;
 $statement_update =  $pdo->prepare($sql_update);
 
 $statement_update->execute([':name_of_user' => $current_user , ':paid_order' => 1 ]);
-$process2_finished = true;
-/*
+
+
 $sql_delete ="DELETE FROM `orders` WHERE name_of_user = :name_of_user";
 		$statement_delete =  $pdo->prepare($sql_delete);
 
@@ -38,7 +38,7 @@ $sql_delete ="DELETE FROM `orders` WHERE name_of_user = :name_of_user";
 			header("Location:/misstais_shop/SUCCESS.php");
 		}
 
-	*/
+$process2_finished = true;	
 
 if($process_finished == true && $process2_finished == true){
 			header("Location:/misstais_shop/SUCCESS.php");

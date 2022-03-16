@@ -46,7 +46,7 @@ echo $current_user;
 	 <?php $cart = 2 * $item['price']; 
 	 	//echo $cart;
 	 ?>
-	 <?php if($item['paid_order'] != 1){ ?>
+	
   	<h3><?= $item['name']. " item" ?></h3>
 	<h4>Количество:<?= $item['quantity']  ?></h4>
 	<h4>Цвет:<?= $item['color']  ?></h4>
@@ -54,7 +54,7 @@ echo $current_user;
 	
 	<a href="add_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>">Добавить</a>
 	<a href="remove_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>">Убрать</a>
-	<?php } ?>
+	
  <?php endforeach; ?>
 
 		<a href="payment_pay.php">Оплатить</a>

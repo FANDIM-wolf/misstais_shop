@@ -6,6 +6,7 @@ $add_item  = $_GET['id'];
 $current_user = $_COOKIE["user"];	
 $color =  $_GET['color'];
 echo "id".$add_item."name:".$current_user;
+$zero =0;
 
 $pdo = new PDO("mysql:host=localhost; dbname=misstais_shop" , "mikael" , "elkin");
 $huruf= $pdo->query("SET NAMES 'utf8'");
@@ -34,6 +35,10 @@ if(!empty($result)){
 $statement_update =  $pdo->prepare($sql_update);
 
 $statement_update->execute([':name_of_user' => $current_user , ':quantity' => $quantity , 'id_of_good' => $add_item , 'color' => $color]);
+$sql_update_1 ="UPDATE orders_history SET quantity =:quantity  WHERE name_of_user = :name_of_user AND id_of_good = :id_of_good AND color =:color AND paid_order = :paid_order"  ;
+$statement_update_1 =  $pdo->prepare($sql_update_1);
+
+$statement_update_1->execute([':name_of_user' => $current_user , ':quantity' => $quantity , 'id_of_good' => $add_item , 'color' => $color , 'paid_order'=> $zero ]);
 $process_finished = true;
 	if($process_finished == true){
 	header("Location:/misstais_shop/cart.php");
@@ -45,6 +50,10 @@ else{
 $statement_update =  $pdo->prepare($sql_update);
 
 $statement_update->execute([':name_of_user' => $current_user , 'id_of_good' => $add_item , "color"  => $color] );
+$sql_update_1 ="INSERT INTO `orders_history`( `name_of_user`, `id_of_good`, `quantity` , `color`) VALUES (:name_of_user,:id_of_good,1 ,:color )";
+$statement_update_1 =  $pdo->prepare($sql_update_1);
+
+$statement_update_1->execute([':name_of_user' => $current_user , 'id_of_good' => $add_item , "color"  => $color] );
 $process_finished = true;
 	if($process_finished == true){
 	header("Location:/misstais_shop/cart.php");
