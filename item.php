@@ -19,6 +19,8 @@ header('Content-Type: text/html; charset=utf-8');?>
 	<?php 
 	$var_id_of_item = $_GET['id']; //id of item
 	$user = $_COOKIE["user"];
+	$color =  "'" .$_GET["color"]."'";
+	echo $color;
 	$comment_id=2343;
 	//show item 
 	$pdo = new PDO("mysql:host=localhost; dbname=misstais_shop" , "mikael" , "elkin");
@@ -28,19 +30,22 @@ header('Content-Type: text/html; charset=utf-8');?>
 	$sql ="SELECT * FROM items WHERE id=".$var_id_of_item;
 	$sql_get_additinal_photos = "SELECT * FROM photos WHERE item_id=".$var_id_of_item;
 	$sql_colors = "SELECT * FROM colors WHERE id_item=".$var_id_of_item;
+	$sql_current_photo = "SELECT * FROM `photos` WHERE name =".$color;
+	$statement_current_photo = $pdo->prepare($sql_current_photo);
 	$statement_colors = $pdo->prepare($sql_colors);
 	$statement =  $pdo->prepare($sql);
 	$statement_get_additional_photos = $pdo->prepare($sql_get_additinal_photos);
 	$statement_get_additional_photos->execute();
 	$statement->execute(); 
 	$statement_colors->execute();
+	$statement_current_photo->execute();
 	$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 	$photos = $statement_get_additional_photos->fetchAll(PDO::FETCH_ASSOC);
 	$colors = $statement_colors->fetchAll(PDO::FETCH_ASSOC);
-	
+	$current_photo = $statement_current_photo->fetchAll(PDO::FETCH_ASSOC);
 	//show comments for this item
 	
-	
+	//print_r($current_photo);
 
 	
 
@@ -50,12 +55,6 @@ header('Content-Type: text/html; charset=utf-8');?>
 	
 	//print_r($items);
 
-	//color of item
-	$color = "default";
-	if($_GET["color"] != " "){
-	$color = $_GET["color"];
-	echo $_GET['color'] ."Selected color";
-	}
 	$comments = $statement_comments->fetchAll(PDO::FETCH_ASSOC);
 	
 
@@ -64,12 +63,21 @@ header('Content-Type: text/html; charset=utf-8');?>
 	
 	<?php foreach($posts as $post): ?>
 	<h3> <?= $post['name']; ?> </h3>
-	<img src="images/<?=$post['image']; ?>" class="photo_item_pro" >
+	<?php
+	 $name = $post['name'];
+	 //$color = $post["default_color"];
+	 ?>
+	
 	<?php endforeach; ?>
+	
 	<br>
+	<?php foreach($current_photo as $item_current_photo): ?>
+	
+	<img  src="images/<?= $item_current_photo["photo"];?>" class="photo_item_pro" >
+	<?php endforeach; ?>
 	<?php foreach($photos as $photo): ?>
 	
-	<img src="images/<?=$photo['name']; ?>" class="photo_item_pro" >
+	<a href="item.php?id=<?=$photo['item_id']?>&color=<?=$photo['name'] ?>"><img  src="images/<?= $photo["photo"];?>" width="50" height="50" ></a>
 	<?php endforeach; ?>
 
 	<?php foreach($posts as $post): ?>
@@ -77,14 +85,16 @@ header('Content-Type: text/html; charset=utf-8');?>
 	<h2> <?= $post['description']; ?> </h2>
 	<?php $post_id_selected = $post['id']; ?>
 
-	<form name="color" method="GET" action="item.php?id=$post_id_selected&color=$color">
-		<input type="hidden" name="id" value="<?=$post_id_selected?>">
-		<?php foreach($colors as $item_color): ?>
-		<input type="radio" name="color" value="<?=$item_color["color"] ?>"><?=$item_color["color"] ?></input>
-		<?php endforeach; ?>
-		<input type="submit" value="Выберете цвет" >
-	</form>
-	<a href="add_item.php?id=<?=$post['id']?>&color=<?=$color?>">Купить</a>
+	<div>
+	
+	</div>
+
+	<?php
+
+	echo $color;
+
+	 ?>
+	<a  href="add_item.php?id=<?=$post['id']?>&color=<?=$color?>">Купить</a>
 
 
 	<?php endforeach; ?>

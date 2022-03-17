@@ -252,7 +252,7 @@ margin-left: 10%;
 	<?php foreach($posts as $post): ?>
 	<div>
 	
-	<a href="item.php?id=<?=$post['id']?>"><img src="images/<?=$post['image']; ?>" class="photo_item" ></a>
+	<a href="item.php?id=<?=$post['id']?>&color=<?=$post['default_color']?>"><img src="images/<?=$post['image']; ?>" class="photo_item" ></a>
 	<br>
 	<p><b><?= $post['price']; ?>RUB </b></p>
 	
