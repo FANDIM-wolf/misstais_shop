@@ -1,4 +1,6 @@
-
+body{
+  font-family: 'Montserrat', sans-serif;
+}
 
 .photo_item{
 	width: 250px;
@@ -9,6 +11,7 @@
 	width: 350px;
 	height: 350px;
 }
+
 .description{
 	max-width: 700px;
 	display: flex;
@@ -26,4 +29,84 @@ h3{
 	font-family: 'Montserrat', sans-serif;
 }
 
+.review_div{
+  display: none;
+}
 
+.open{
+  display: block;
+}
+
+
+textarea {
+  width: 20%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+.link_buy{
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+
+.button_misstais{
+  width: 20%;
+  height: 35px;
+  color: white;
+  background-color:#998376;
+  border-radius:4px;
+  border-color:#998376;
+  font-size: 18px;
+}
+
+.button_misstais_send{
+  width: 15%;
+  height: 25px;
+  color: white;
+  background-color:#998376;
+  border-radius:4px;
+  border-color:#998376;
+  font-size: 18px;
+}
+ .inputbox {
+  position: relative;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 50px;
+}
+ .inputbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: 2px solid #000;
+  outline: none;
+  background: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.2em;
+}
+ .inputbox:last-child {
+  margin-bottom: 0;
+}
+ .inputbox span {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 1em;
+  transition: 0.6s;
+  font-family: sans-serif;
+}
+ .inputbox input:focus ~ span,
+ .inputbox input:valid ~ span {
+  transform: translateX(-13px) translateY(-35px);
+  font-size: 1em;
+}
+ 
