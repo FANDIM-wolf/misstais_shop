@@ -1,0 +1,1 @@
+document.getElementById("textarea_comment").value = " ";
