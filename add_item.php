@@ -34,7 +34,7 @@ if(!empty($result)){
 	$sql_update ="UPDATE orders SET quantity =:quantity  WHERE name_of_user = :name_of_user AND id_of_good = :id_of_good AND color =:color" ;
 $statement_update =  $pdo->prepare($sql_update);
 
-$statement_update->execute([':name_of_user' => $current_user , ':quantity' => $quantity , 'id_of_good' => $add_item , 'color' => $color]);
+$statement_update->execute([':name_of_user' => $current_user , ':quantity' => $quantity , ':id_of_good' => $add_item , ':color' => $color]);
 $sql_update_1 ="UPDATE orders_history SET quantity =:quantity  WHERE name_of_user = :name_of_user AND id_of_good = :id_of_good AND color =:color AND paid_order = :paid_order"  ;
 $statement_update_1 =  $pdo->prepare($sql_update_1);
 

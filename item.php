@@ -19,8 +19,8 @@ header('Content-Type: text/html; charset=utf-8');?>
 	<?php 
 	$var_id_of_item = $_GET['id']; //id of item
 	$user = $_COOKIE["user"];
-	$color =  "'" .$_GET["color"]."'";
-	echo $color;
+	$color =  $_GET["color"];
+	//echo $color;
 	$comment_id=2343;
 	//show item 
 	$pdo = new PDO("mysql:host=localhost; dbname=misstais_shop" , "mikael" , "elkin");
@@ -30,7 +30,7 @@ header('Content-Type: text/html; charset=utf-8');?>
 	$sql ="SELECT * FROM items WHERE id=".$var_id_of_item;
 	$sql_get_additinal_photos = "SELECT * FROM photos WHERE item_id=".$var_id_of_item;
 	$sql_colors = "SELECT * FROM colors WHERE id_item=".$var_id_of_item;
-	$sql_current_photo = "SELECT * FROM `photos` WHERE name =".$color;
+	$sql_current_photo = "SELECT * FROM `photos` WHERE name = :name";
 	$statement_current_photo = $pdo->prepare($sql_current_photo);
 	$statement_colors = $pdo->prepare($sql_colors);
 	$statement =  $pdo->prepare($sql);
@@ -38,7 +38,7 @@ header('Content-Type: text/html; charset=utf-8');?>
 	$statement_get_additional_photos->execute();
 	$statement->execute(); 
 	$statement_colors->execute();
-	$statement_current_photo->execute();
+	$statement_current_photo->execute([':name'=>$color]);
 	$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 	$photos = $statement_get_additional_photos->fetchAll(PDO::FETCH_ASSOC);
 	$colors = $statement_colors->fetchAll(PDO::FETCH_ASSOC);
@@ -89,21 +89,23 @@ header('Content-Type: text/html; charset=utf-8');?>
 	
 	</div>
 
-	<?php
+	
+	<a  class="link_buy"  href="add_item.php?id=<?=$post['id']?>&color=<?=$color?>">Купить</a>
+	<br>
 
-	echo $color;
-
-	 ?>
-	<a  href="add_item.php?id=<?=$post['id']?>&color=<?=$color?>">Купить</a>
-
-
+	
 	<?php endforeach; ?>
-	<form method="POST" action="send_comment.php?id=<?=$_GET['id']?>" name="form_create_comment">
+	<br>
+	<button id="review_button" class="button_misstais" >Оставить отзыв</button>
+	<div class="review_div" id = "review_div" >
+	<form method="POST" action="send_comment.php?id=<?=$_GET['id']?>" name="form_create_comment" >
+	<br>	
 	<textarea  name="item_comment" class="item_box" id="textarea_comment"  placeholder="Ваш отзыв" onclick="if (event.keyCode == 13) document.search.submit();"></textarea>
-	<input type="submit" value="Оставить отзыв"  class="image_logo" >
+	<br>
+	<input type="submit" value="Отправить"  class="button_misstais_send" class="image_logo" >
 	
 	</form>
-	
+	</div>
 	<?php foreach($comments as $comment): ?>
 	<b><p><?= $comment['name_of_user']; ?> </p></b>	
 	<h4> <?= $comment['text']; ?> </h4>
@@ -111,5 +113,16 @@ header('Content-Type: text/html; charset=utf-8');?>
 	<?php endforeach; ?>
 
 	<script src="scripts/clear_rows.js"></script>
+	<script text="javascript">
+		var  review_button = document.getElementById("review_button");
+		var  review_div = document.getElementById("review_div");
+		console.log("review_div");
+		console.log("review_button");
+
+ 		review_button.onclick = function (){
+ 		 	review_div.classList.toggle("open");
+ 		}
+
+	</script>	
 </body>
 </html>

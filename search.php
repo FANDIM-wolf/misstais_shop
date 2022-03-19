@@ -180,6 +180,6 @@ margin-left: 10%;
 	?>
 	<?php foreach ($items as $item): ?>  
   	<p><?= $item['name'] ?></p>
-	<a href="item.php?id=<?=$item['id']?>"><img src="images/<?=$item['image']; ?>" class="photo_item" ></a>
-	<a href="add_item.php?id=<?=$item['id']?>">Купить</a>
+	<a href="item.php?id=<?=$item['id']?>&color=<?=$item['default_color']?>"><img src="images/<?=$item['image']; ?>" class="photo_item" ></a>
+	<a  class="link_buy"  href="add_item.php?id=<?=$item['id']?>&color=<?=$item['default_color']?>">Купить</a>
  <?php endforeach; ?>

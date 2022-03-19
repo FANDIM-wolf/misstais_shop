@@ -55,6 +55,15 @@
 	font-size: 20px;
 
 }
+.button_misstais{
+  width: 20%;
+  height: 35px;
+  color: white;
+  background-color:#998376;
+  border-radius:4px;
+  border-color:#998376;
+  font-size: 18px;
+}
 
 </style>
 
@@ -74,7 +83,7 @@ echo $current_user;
 <?php 
 	
 	$total_price = 0;
-	
+	$delivery  = 220;
 	$pdo = new PDO("mysql:host=localhost; dbname=misstais_shop" , "mikael" , "elkin");
 	$huruf= $pdo->query("SET NAMES 'utf8'");
 	$huruf2= $pdo->query("SET CHARACTER SET 'utf8'");
@@ -103,13 +112,15 @@ echo $current_user;
 	<h4>Количество:<?= $item['quantity']  ?></h4>
 	<h4>Цена:<?= $item['price']  * $item['quantity']?></h4>
 	
-	<a href="add_item.php?id=<?=$item['id']?>">Добавить</a>
-	<a href="remove_item.php?id=<?=$item['id']?>">Убрать</a>
+	<a href="add_item.php?id=<?=$item['id']?>"><img src="images/add.png"></a>
+	<a href="remove_item.php?id=<?=$item['id']?>"><img src="images/minus.png"></a>
+	<a href="delete_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/minus.png"></a>
 		<?php } ?>
 	 <?php endforeach; ?>
 	<br>
 	<br>
-	<h3>Итого к оплате : <?php echo $total_price; ?>RUB </h3>
+	<h3>Доставка : <?php echo $delivery; ?>RUB </h3>
+	<h3>Итого к оплате : <?php echo $total_price+$delivery; ?>RUB </h3>
 
 	<form method="POST" action="pay_order.php">
 		<input class="inputbox" type="text" placeholder="Город"  name="town_payment"><br>
@@ -118,7 +129,7 @@ echo $current_user;
 		<input class="inputbox" type="text" placeholder="Квартира"   name="flat_payment"><br>
 		<input class="inputbox" type="text" placeholder="Номер телефона"    name="phone_payment"><br>
 		<input class="inputbox"  type="text" placeholder="Почтовый код"   name="postcode"><br>
-		<input class="class_button" value="Оплатить" type="submit" name="submit"> 
+		<input value="Оплатить" class="button_misstais" type="submit" name="submit"> 
 	</form>	
 </body>
 </html>

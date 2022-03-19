@@ -52,12 +52,12 @@ echo $current_user;
 	<h4>Цвет:<?= $item['color']  ?></h4>
 	<h4>Цена:<?= $item['price']  * $item['quantity']?></h4>
 	
-	<a href="add_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>">Добавить</a>
-	<a href="remove_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>">Убрать</a>
-	
+	<a href="add_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/add.png"></a>
+	<a href="remove_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/minus.png"></a>
+	<a href="delete_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/minus.png"></a>
  <?php endforeach; ?>
 
-		<a href="payment_pay.php">Оплатить</a>
+		<a class="link_buy" href="payment_pay.php">Оплатить</a>
 
 </body>
 </html>

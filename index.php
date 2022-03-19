@@ -44,6 +44,19 @@ a{
 	border-color: black;
 
 	*/
+	border: none;
+	width: 300px;
+	height:25px;
+
+}
+
+.item_box:hover{
+	/*width: 300px;
+	height: 25px;
+	border-radius: 8px;
+	border-color: black;
+
+	*/
 	border:none;
 	width: 300px;
 	height:25px;
