@@ -54,7 +54,7 @@ echo $current_user;
 	
 	<a href="add_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/add.png"></a>
 	<a href="remove_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/minus.png"></a>
-	<a href="delete_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/minus.png"></a>
+	<a href="delete_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/x-mark.png"></a>
  <?php endforeach; ?>
 
 		<a class="link_buy" href="payment_pay.php">Оплатить</a>

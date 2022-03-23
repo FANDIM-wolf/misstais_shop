@@ -49,7 +49,9 @@ a{
 
 
 
-
+.list_of_post{
+	margin-left: 10%;
+}
 
 .item_box{
 	/*width: 300px;
@@ -178,8 +180,11 @@ margin-left: 10%;
 	
 	$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 	?>
-	<?php foreach ($items as $item): ?>  
+	<div class="list_of_post">
+	<?php foreach ($items as $item): ?> 
+
   	<p><?= $item['name'] ?></p>
 	<a href="item.php?id=<?=$item['id']?>&color=<?=$item['default_color']?>"><img src="images/<?=$item['image']; ?>" class="photo_item" ></a>
 	<a  class="link_buy"  href="add_item.php?id=<?=$item['id']?>&color=<?=$item['default_color']?>">Купить</a>
  <?php endforeach; ?>
+</div>

@@ -10,6 +10,9 @@
 </head>
 <body>
 <style type="text/css">
+	.list_of_posts{
+  margin-left: 10%;
+}
 	 .inputbox {
   position: relative;
   width: 600px;
@@ -100,6 +103,7 @@ echo $current_user;
 	
 	$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 	?>
+	<div class="list_of_posts">
 	<?php foreach ($posts as $item): ?>  
 	<?php if($item['paid_order'] != 1){ ?>	
 	 <?php $cart = 2 * $item['price']; 
@@ -114,7 +118,7 @@ echo $current_user;
 	
 	<a href="add_item.php?id=<?=$item['id']?>"><img src="images/add.png"></a>
 	<a href="remove_item.php?id=<?=$item['id']?>"><img src="images/minus.png"></a>
-	<a href="delete_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/minus.png"></a>
+	<a href="delete_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/x-mark.png"></a>
 		<?php } ?>
 	 <?php endforeach; ?>
 	<br>
@@ -131,5 +135,6 @@ echo $current_user;
 		<input class="inputbox"  type="text" placeholder="Почтовый код"   name="postcode"><br>
 		<input value="Оплатить" class="button_misstais" type="submit" name="submit"> 
 	</form>	
+	</div>	
 </body>
 </html>

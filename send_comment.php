@@ -5,6 +5,8 @@ $huruf= $pdo->query("SET NAMES 'utf8'");
 $huruf2= $pdo->query("SET CHARACTER SET 'utf8'");
 $huruf3= $pdo->query("SET SESSION collation_connection = 'utf8_general_ci'");
 
+if($_POST["item_comment"] != " "){
+
 $sql_add_comment = "INSERT INTO `comments`( `id_item`, `name_of_user`, `text`) VALUES (:id_item,:name_of_user,:text_of_comment)";
 		$statement_add_comment = $pdo->prepare($sql_add_comment);
 		$statement_add_comment->bindParam(":id_item" , $_GET["id"]);
@@ -13,3 +15,5 @@ $sql_add_comment = "INSERT INTO `comments`( `id_item`, `name_of_user`, `text`) V
 
 		$statement_add_comment->execute();
     header("Location:".$_SERVER['HTTP_REFERER']);
+
+}

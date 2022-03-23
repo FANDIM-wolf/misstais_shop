@@ -9,10 +9,76 @@ header('Content-Type: text/html; charset=utf-8');?>
 	 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat:wght@200;300&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<link rel="stylesheet"  href="styles/style.css">
 	<meta charset="UTF-8">
 	<title></title>
 </head>
+<style type="text/css">
+	.list_of_posts{
+  margin-left: 10%;
+}
+.wrapper{
+		margin-top: 10px;
+		text-align: center; /*располагаем содержимое блока по центру*/
+		margin-left:70px;
+	}
+.box {
+display: inline-block; /*располагаем блоки в ряд по горизонтали*/
+/*убираем правый отступ между блоками*/
+margin-right: 230px;
+font-weight: 400;
+}
+#boxs{
+	margin-top:5px;
+}
+
+.item_box{
+	/*width: 300px;
+	height: 25px;
+	border-radius: 8px;
+	border-color: black;
+
+	*/
+	border: none;
+	width: 300px;
+	height:25px;
+
+}
+.item_box_textarea{
+	/*width: 300px;
+	height: 25px;
+	border-radius: 8px;
+	border-color: black;
+
+	*/
+	border: none;
+	width: 300px;
+	height:150px;
+
+}
+
+.item_box:hover{
+	/*width: 300px;
+	height: 25px;
+	border-radius: 8px;
+	border-color: black;
+
+	*/
+	border:none;
+	width: 300px;
+	height:25px;
+
+}
+
+a{
+	font-family: 'Montserrat', sans-serif;
+	text-decoration: none;
+	color:black;
+}
+
+}
+
+</style>
 <body>
 	
 	
@@ -59,8 +125,35 @@ header('Content-Type: text/html; charset=utf-8');?>
 	
 
 	?>
+	<div class="wrapper">
+<div class="box" id="boxa">
 
+
+	<a href="/misstais_shop" ><img    src="files_for_front/logo.png"></a>
+
+</div>
+<div class="box">
+	<form method="GET" action="search.php" name="search">
+	<input type="text" name="item_name" class="item_box"  placeholder="Введите названия продукта" onclick="if (event.keyCode == 13) document.search.submit();">
+	<input type="image" value="" src="files_for_front/loupe.png" class="image_logo" >
 	
+	</form>
+</div>
+
+<div class="box" id="boxs">
+	<?php if($_COOKIE["user"] != " "){ ?>
+    	<?php echo $_COOKIE["user"] ?>
+	<?php } ?>
+	<?php if(isset($_COOKIE["user"]) == false || $_COOKIE["user"] == " "){?>
+		<a  href="authorization.php">Sign in</a>
+	<?php } ?>
+
+	<a href="cart.php"><img class="photo_panel" src="files_for_front/shopping-cart.png"></a>
+	<a href="user.php"><img class="photo_panel" src="files_for_front/user.png"></a>
+	<a href="cart.php"><img class="photo_panel" src="files_for_front/heart.png"></a>
+</div>
+</div>
+	<div class="list_of_posts">
 	<?php foreach($posts as $post): ?>
 	<h3> <?= $post['name']; ?> </h3>
 	<?php
@@ -100,7 +193,7 @@ header('Content-Type: text/html; charset=utf-8');?>
 	<div class="review_div" id = "review_div" >
 	<form method="POST" action="send_comment.php?id=<?=$_GET['id']?>" name="form_create_comment" >
 	<br>	
-	<textarea  name="item_comment" class="item_box" id="textarea_comment"  placeholder="Ваш отзыв" onclick="if (event.keyCode == 13) document.search.submit();"></textarea>
+	<textarea  name="item_comment" class="item_box_textarea" id="textarea_comment"  placeholder="Ваш отзыв" onclick="if (event.keyCode == 13) document.search.submit();"></textarea>
 	<br>
 	<input type="submit" value="Отправить"  class="button_misstais_send" class="image_logo" >
 	
@@ -111,7 +204,7 @@ header('Content-Type: text/html; charset=utf-8');?>
 	<h4> <?= $comment['text']; ?> </h4>
 
 	<?php endforeach; ?>
-
+	</div>
 	<script src="scripts/clear_rows.js"></script>
 	<script text="javascript">
 		var  review_button = document.getElementById("review_button");
