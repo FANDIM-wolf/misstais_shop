@@ -86,6 +86,8 @@ a{
 	$var_id_of_item = $_GET['id']; //id of item
 	$user = $_COOKIE["user"];
 	$color =  $_GET["color"];
+	$size_item = $_GET["size"];
+
 	//echo $color;
 	$comment_id=2343;
 	//show item 
@@ -95,8 +97,10 @@ a{
 	$huruf3= $pdo->query("SET SESSION collation_connection = 'utf8_general_ci'");
 	$sql ="SELECT * FROM items WHERE id=".$var_id_of_item;
 	$sql_get_additinal_photos = "SELECT * FROM photos WHERE item_id=".$var_id_of_item;
+	$sql_get_additinal_sizes = "SELECT * FROM sizes WHERE id_item=".$var_id_of_item;
 	$sql_colors = "SELECT * FROM colors WHERE id_item=".$var_id_of_item;
 	$sql_current_photo = "SELECT * FROM `photos` WHERE name = :name";
+	$statement_sizes = $pdo->prepare($sql_get_additinal_sizes);
 	$statement_current_photo = $pdo->prepare($sql_current_photo);
 	$statement_colors = $pdo->prepare($sql_colors);
 	$statement =  $pdo->prepare($sql);
@@ -104,11 +108,14 @@ a{
 	$statement_get_additional_photos->execute();
 	$statement->execute(); 
 	$statement_colors->execute();
+	$statement_sizes->execute();
 	$statement_current_photo->execute([':name'=>$color]);
 	$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 	$photos = $statement_get_additional_photos->fetchAll(PDO::FETCH_ASSOC);
 	$colors = $statement_colors->fetchAll(PDO::FETCH_ASSOC);
 	$current_photo = $statement_current_photo->fetchAll(PDO::FETCH_ASSOC);
+	$sizes = $statement_sizes->fetchAll(PDO::FETCH_ASSOC);
+	//print_r($sizes);
 	//show comments for this item
 	
 	//print_r($current_photo);
@@ -142,7 +149,7 @@ a{
 
 <div class="box" id="boxs">
 	<?php if($_COOKIE["user"] != " "){ ?>
-    	<?php echo $_COOKIE["user"] ?>
+    	
 	<?php } ?>
 	<?php if(isset($_COOKIE["user"]) == false || $_COOKIE["user"] == " "){?>
 		<a  href="authorization.php">Sign in</a>
@@ -164,6 +171,7 @@ a{
 	<?php endforeach; ?>
 	
 	<br>
+
 	<?php foreach($current_photo as $item_current_photo): ?>
 	
 	<img  src="images/<?= $item_current_photo["photo"];?>" class="photo_item_pro" >
@@ -172,6 +180,11 @@ a{
 	
 	<a href="item.php?id=<?=$photo['item_id']?>&color=<?=$photo['name'] ?>"><img  src="images/<?= $photo["photo"];?>" width="50" height="50" ></a>
 	<?php endforeach; ?>
+ 
+	<?php foreach($sizes as $size): ?>
+		<a href="item.php?id=<?=$size['id_item']?>&color=<?=$size['default_color'] ?>&size=<?=$size['size'] ?>"><?= $size["size"];?></a>
+
+	<?php endforeach; ?>	
 
 	<?php foreach($posts as $post): ?>
 	<b><p><?= $post['price']; ?> РУБ</p></b>	
@@ -183,7 +196,7 @@ a{
 	</div>
 
 	
-	<a  class="link_buy"  href="add_item.php?id=<?=$post['id']?>&color=<?=$color?>">Купить</a>
+	<a  class="link_buy"  href="add_item.php?id=<?=$post['id']?>&color=<?=$color?>&size=<?=$size_item ?>">Купить</a>
 	<br>
 
 	

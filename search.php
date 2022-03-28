@@ -51,6 +51,10 @@ a{
 
 .list_of_post{
 	margin-left: 10%;
+	display: grid; /*располагаем блоки в ряд по горизонтали*/
+	grid-template-columns: 400px 400px 400px 400px ;
+	
+/*убираем правый отступ между блоками*/
 }
 
 .item_box{
@@ -144,8 +148,7 @@ margin-left: 10%;
 
 <div class="box" id="boxs">
 	<?php if($_COOKIE["user"] != " "){ ?>
-    	<?php echo $_COOKIE["user"] ?>
-	<?php } ?>
+    	<?php echo $_COOKIE["user"] ?><?php } ?>
 	<?php if(isset($_COOKIE["user"]) == false){?>
 		<a  href="registration.php">Sign up</a>
 	<?php } ?>
@@ -182,9 +185,10 @@ margin-left: 10%;
 	?>
 	<div class="list_of_post">
 	<?php foreach ($items as $item): ?> 
-
+	<div>
   	<p><?= $item['name'] ?></p>
 	<a href="item.php?id=<?=$item['id']?>&color=<?=$item['default_color']?>"><img src="images/<?=$item['image']; ?>" class="photo_item" ></a>
 	<a  class="link_buy"  href="add_item.php?id=<?=$item['id']?>&color=<?=$item['default_color']?>">Купить</a>
- <?php endforeach; ?>
+	</div> 
+<?php endforeach; ?>
 </div>

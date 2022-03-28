@@ -5,6 +5,7 @@ $process_finished = false ;
 $add_item  = $_GET['id'];
 $current_user = $_COOKIE["user"];	
 $color = $_GET["color"];
+$size = $_GET["size"];
 echo "id".$add_item."name:".$current_user;
 $zero =0;
 

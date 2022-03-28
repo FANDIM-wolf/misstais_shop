@@ -2,7 +2,15 @@
 
 require "sql_db.php";
 
-if($_POST["email_payment"] != " " && $_POST["phone_payment"] != " " && $_POST["town_payment"] != " "){
+$town = $_POST["town_payment"];
+$street = $_POST["street_payment"];
+$email = $_POST["email_payment"];
+$flat = $_POST["flat_payment"];
+$postcode = $_POST["postcode"];
+$phone = $_POST["phone_payment"];
+
+if( empty($town) == false){
+	
 $process_finished = false ; 
 $process2_finished = false;
 
@@ -35,17 +43,19 @@ $sql_delete ="DELETE FROM `orders` WHERE name_of_user = :name_of_user";
 		$statement_delete->execute([':name_of_user' => $current_user ]);
 		$process_finished = true;
 		if($process_finished == true){
-			header("Location:/misstais_shop/SUCCESS.php");
+			//header("Location:/misstais_shop/SUCCESS.php");
 		}
 
 $process2_finished = true;	
 
 if($process_finished == true && $process2_finished == true){
 			header("Location:/misstais_shop/SUCCESS.php");
+			echo "town:".$_POST['town_payment'];
 		}
-
+		
 }
 else{
 
-	echo "Email:".$_POST["email_payment"];
+	//header("Location:".$_SERVER['HTTP_REFERER']);
+	echo "town".$_POST["town_payment"]."phone:".$_POST["phone_payment"];
 }

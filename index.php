@@ -15,12 +15,12 @@
 .wrapper {
 		margin-top: 10px;
 		text-align: center; /*располагаем содержимое блока по центру*/
-		margin-left:70px;
+		margin-left:75px;
 	}
 .box {
 display: inline-block; /*располагаем блоки в ряд по горизонтали*/
 /*убираем правый отступ между блоками*/
-margin-right: 230px;
+margin-right: 290px;
 font-weight: 400;
 }
 #boxs{
@@ -199,7 +199,7 @@ margin-left: 10%;
 
 <div class="box" id="boxs">
 	<?php if($_COOKIE["user"] != " "){ ?>
-    	<?php echo $_COOKIE["user"] ?>
+     	
 	<?php } ?>
 	<?php if(isset($_COOKIE["user"]) == false || $_COOKIE["user"] == " "){?>
 		<a  href="authorization.php">Sign in</a>
@@ -265,7 +265,7 @@ margin-left: 10%;
 	<?php foreach($posts as $post): ?>
 	<div>
 	
-	<a href="item.php?id=<?=$post['id']?>&color=<?=$post['default_color']?>"><img src="images/<?=$post['image']; ?>" class="photo_item" ></a>
+	<a href="item.php?id=<?=$post['id']?>&color=<?=$post['default_color']?>&size=<?=$post['default_size']?>"><img src="images/<?=$post['image']; ?>" class="photo_item" ></a>
 	<br>
 	<p><b><?= $post['price']; ?>RUB </b></p>
 	

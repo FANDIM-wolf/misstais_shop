@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 	<title>Misstais shop</title>
@@ -33,14 +33,24 @@ echo $current_user;
 	$sql ="SELECT * FROM orders INNER JOIN items ON orders.id_of_good = items.id WHERE name_of_user = :name_of_user  ";
 	$statement =  $pdo->prepare($sql);
 	$statement->execute([':name_of_user' => $current_user]); 
-
-	//print_r($items);
-
+	$goods_exist = false;
 	
+	//print_r($items);
 
 	
 	
 	$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+	
+	// check is cart empty
+	if(sizeof($posts) == 0){
+		$goods_exist = false;
+	}
+	else{
+		$goods_exist = true;
+	}
+	//print_r($items);
+
+
 	?>
 	<?php foreach ($posts as $item): ?>  
 	 <?php $cart = 2 * $item['price']; 
@@ -56,8 +66,12 @@ echo $current_user;
 	<a href="remove_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/minus.png"></a>
 	<a href="delete_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/x-mark.png"></a>
  <?php endforeach; ?>
+  <?php if($goods_exist == true){ ?>
+			<a class="link_buy" href="payment_pay.php">Оплатить</a>
+  <?php } ?>
 
-		<a class="link_buy" href="payment_pay.php">Оплатить</a>
-
+  <?php if($goods_exist == false){ ?>
+			<p>Корзина пуста .</p>
+  <?php } ?>
 </body>
 </html>

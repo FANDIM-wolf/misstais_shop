@@ -14,10 +14,12 @@
   margin-left: 10%;
 }
 	 .inputbox {
-  position: relative;
+
   width: 600px;
-  height: 20px;
-  margin-bottom: 50px;
+  height: 25px;
+  margin-bottom: 30px;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
 }
  .inputbox input {
   position: absolute;
@@ -30,6 +32,7 @@
   padding: 10px;
   border-radius: 10px;
   font-size: 1.2em;
+
 }
  .inputbox:last-child {
   margin-bottom: 0;
@@ -127,11 +130,17 @@ echo $current_user;
 	<h3>Итого к оплате : <?php echo $total_price+$delivery; ?>RUB </h3>
 
 	<form method="POST" action="pay_order.php">
-		<input class="inputbox" type="text" placeholder="Город"  name="town_payment"><br>
-		<input class="inputbox" type="text" placeholder="Улица"  name="street_payment"><br>
-		<input class="inputbox" type="email" placeholder="Email , почта"   name="email_payment"><br>
-		<input class="inputbox" type="text" placeholder="Квартира"   name="flat_payment"><br>
-		<input class="inputbox" type="text" placeholder="Номер телефона"    name="phone_payment"><br>
+		<p>Город</p>
+		<input class="inputbox" type="text" placeholder="Город"  name="town_payment">
+		<p>Улица</p>
+		<input class="inputbox" type="text" placeholder="Улица"  name="street_payment">
+		<p>Email , почта</p>
+		<input class="inputbox" type="email" placeholder="Email , почта"   name="email_payment">
+		<p>Квартира</p>
+		<input class="inputbox" type="text" placeholder="Квартира"   name="flat_payment">
+		<p>Номер телефона</p>
+		<input class="inputbox" type="text" placeholder="Номер телефона"    name="phone_payment">
+		<p>Почтовый код</p>
 		<input class="inputbox"  type="text" placeholder="Почтовый код"   name="postcode"><br>
 		<input value="Оплатить" class="button_misstais" type="submit" name="submit"> 
 	</form>	

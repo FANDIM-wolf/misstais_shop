@@ -17,3 +17,6 @@ $sql_add_comment = "INSERT INTO `comments`( `id_item`, `name_of_user`, `text`) V
     header("Location:".$_SERVER['HTTP_REFERER']);
 
 }
+else{
+ 	 header("Location:".$_SERVER['HTTP_REFERER']);
+}
