@@ -60,11 +60,14 @@ echo $current_user;
   	<h3><?= $item['name']. " item" ?></h3>
 	<h4>Количество:<?= $item['quantity']  ?></h4>
 	<h4>Цвет:<?= $item['color']  ?></h4>
+	<?php if($item['size'] != " ") { ?>
+	<h4>Размер:<?= $item['size']  ?></h4>
+		<?php }?>
 	<h4>Цена:<?= $item['price']  * $item['quantity']?></h4>
 	
-	<a href="add_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/add.png"></a>
-	<a href="remove_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/minus.png"></a>
-	<a href="delete_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/x-mark.png"></a>
+	<a href="add_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>&size=<?=$item['size']?>"><img src="images/add.png"></a>
+	<a href="remove_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>&size=<?=$item['size']?>"><img src="images/minus.png"></a>
+	<a href="delete_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>&size=<?=$item['size']?>"><img src="images/x-mark.png"></a>
  <?php endforeach; ?>
   <?php if($goods_exist == true){ ?>
 			<a class="link_buy" href="payment_pay.php">Оплатить</a>

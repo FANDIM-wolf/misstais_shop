@@ -20,17 +20,19 @@
   margin-bottom: 30px;
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
+  border-radius: 10px;
+  border: 3px solid #000;
 }
  .inputbox input {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  border: 2px solid #000;
+  border:3px solid #000;
   outline: none;
   background: none;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 4px;
+  border-radius: 20px;
   font-size: 1.2em;
 
 }
@@ -95,6 +97,7 @@ echo $current_user;
 	$huruf2= $pdo->query("SET CHARACTER SET 'utf8'");
 	$huruf3= $pdo->query("SET SESSION collation_connection = 'utf8_general_ci'");
 	$sql ="SELECT * FROM orders INNER JOIN items ON orders.id_of_good = items.id WHERE name_of_user = :name_of_user  ";
+
 	$statement =  $pdo->prepare($sql);
 	$statement->execute([':name_of_user' => $current_user]); 
 
@@ -108,7 +111,7 @@ echo $current_user;
 	?>
 	<div class="list_of_posts">
 	<?php foreach ($posts as $item): ?>  
-	<?php if($item['paid_order'] != 1){ ?>	
+	
 	 <?php $cart = 2 * $item['price']; 
 	 	//echo $cart;
 	 
@@ -119,10 +122,8 @@ echo $current_user;
 	<h4>Количество:<?= $item['quantity']  ?></h4>
 	<h4>Цена:<?= $item['price']  * $item['quantity']?></h4>
 	
-	<a href="add_item.php?id=<?=$item['id']?>"><img src="images/add.png"></a>
-	<a href="remove_item.php?id=<?=$item['id']?>"><img src="images/minus.png"></a>
-	<a href="delete_item.php?id=<?=$item['id']?>&color=<?=$item['color']?>"><img src="images/x-mark.png"></a>
-		<?php } ?>
+	
+
 	 <?php endforeach; ?>
 	<br>
 	<br>

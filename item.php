@@ -178,7 +178,7 @@ a{
 	<?php endforeach; ?>
 	<?php foreach($photos as $photo): ?>
 	
-	<a href="item.php?id=<?=$photo['item_id']?>&color=<?=$photo['name'] ?>"><img  src="images/<?= $photo["photo"];?>" width="50" height="50" ></a>
+	<a href="item.php?id=<?=$photo['item_id']?>&color=<?=$photo['name'] ?>&size=<?=$size_item?> "><img  src="images/<?= $photo["photo"];?>" width="50" height="50" ></a>
 	<?php endforeach; ?>
  
 	<?php foreach($sizes as $size): ?>
