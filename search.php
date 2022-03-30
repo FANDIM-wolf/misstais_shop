@@ -154,7 +154,7 @@ margin-left: 10%;
 	<?php } ?>
 
 	<a href="cart.php"><img  src="files_for_front/shopping-cart.png"></a>
-	<a href="cart.php"><img  src="files_for_front/user.png"></a>
+	<a href="user.php"><img  src="files_for_front/user.png"></a>
 	<a href="cart.php"><img  src="files_for_front/heart.png"></a>
 </div>
 </div>
