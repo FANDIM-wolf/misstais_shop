@@ -109,6 +109,10 @@ font-weight: 400;
 	height:25px;
 
 }
+.photo_panel{
+	width:20px;
+	height:20px;
+}
 </style>
 <div class="wrapper">
 <div class="box" id="boxa">
@@ -138,6 +142,7 @@ font-weight: 400;
 	<a href="cart.php"><img class="photo_panel" src="files_for_front/heart.png"></a>
 </div>
 </div>
+<br>
 <main>
 <?php 
 if(isset($_COOKIE["user"]) == true && $_COOKIE["user"] != " "){
@@ -149,8 +154,8 @@ if(isset($_COOKIE["user"]) == true && $_COOKIE["user"] != " "){
 <?php 
 if(isset($_COOKIE["user"]) == false || $_COOKIE["user"] == " "){
  ?>
- 	<h3>Авторизируйтесь или зарегистрируйтесь пожалуйста</h3> 
- 	<a href="registration.php" >Зарегистрироваться</a>
+ 	<h3>Авторизируйтесь  пожалуйста</h3> 
+ 
  	<a href="authorization.php" >Авторизироваться</a>
  	
  <?php } ?>

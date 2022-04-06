@@ -17,6 +17,9 @@ header('Content-Type: text/html; charset=utf-8');?>
 	.list_of_posts{
   margin-left: 10%;
 }
+#inline{
+	display: flex;
+}
 .wrapper{
 		margin-top: 10px;
 		text-align: center; /*располагаем содержимое блока по центру*/
@@ -171,24 +174,36 @@ a{
 	<?php endforeach; ?>
 	
 	<br>
-
+	<div id="inline">	
 	<?php foreach($current_photo as $item_current_photo): ?>
-	
-	<img  src="images/<?= $item_current_photo["photo"];?>" class="photo_item_pro" >
+		<div id="current_photo">
+		<img  src="images/<?= $item_current_photo["photo"];?>" class="photo_item_pro" >
+		</div>
+
 	<?php endforeach; ?>
+	<?php foreach($posts as $post): ?>
+		<div id="desc">
+		<p><?= $post["description"]?></p>
+		<h3>Выберете цвет:</h3>
 	<?php foreach($photos as $photo): ?>
-	
+		
+	<br>
 	<a href="item.php?id=<?=$photo['item_id']?>&color=<?=$photo['name'] ?>&size=<?=$size_item?> "><img  src="images/<?= $photo["photo"];?>" width="50" height="50" ></a>
 	<?php endforeach; ?>
- 
+ 	<br>
+ 	<h3>Выберете размер:</h3>
 	<?php foreach($sizes as $size): ?>
 		<a href="item.php?id=<?=$size['id_item']?>&color=<?=$size['default_color'] ?>&size=<?=$size['size'] ?>"><?= $size["size"];?></a>
 
-	<?php endforeach; ?>	
+	<?php endforeach; ?>
+		</div>
+	<?php endforeach; ?>
+	</div>
+		
 
 	<?php foreach($posts as $post): ?>
 	<b><p><?= $post['price']; ?> РУБ</p></b>	
-	<h2> <?= $post['description']; ?> </h2>
+	
 	<?php $post_id_selected = $post['id']; ?>
 
 	<div>

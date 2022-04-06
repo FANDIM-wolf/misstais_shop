@@ -10,13 +10,25 @@
 	<meta charset="UTF-8">
 </head>
 <body>
+<main>	
+<style type="text/css">
+	a{
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  color: black;
+}
+main{
+	margin-left: 40%;
+}
+</style>
 <h2>Авторизация</h2>
 	<form method="GET">
-	<input type="text" name="login_name" placeholder="Имя"><br>
-	<input type="password" name="password" placeholder="Пароль"><br>
-	<input type="submit" >
+	<input type="text" class="inputbox" name="login_name" id="login_input" placeholder="Имя"><br>
+	<input type="password" class="inputbox" name="password" id="password_input" placeholder="Пароль"><br>
+	<input type="submit"  value="Войти" class="button_misstais"  >
 </form>
 <?php
+ini_set('display_errors',0);
 $login_name = $_GET['login_name'];
 $password=$_GET['password'];
 
@@ -26,33 +38,48 @@ $pdo = new PDO("mysql:host=localhost; dbname=misstais_shop; charset=utf8" , "mik
 $huruf= $pdo->query("SET NAMES 'utf8'");
 	$huruf2= $pdo->query("SET CHARACTER SET 'utf8'");
 	$huruf3= $pdo->query("SET SESSION collation_connection = 'utf8_general_ci'");
+
+
 if($_GET['login_name'] != " " ){
-	$sql ="SELECT  * FROM users WHERE login_name = :login_name AND password =:password ";
+	$sql ="SELECT * FROM users WHERE login_name = :name AND password = :password ";
 	$statement =  $pdo->prepare($sql);
-	$statement->bindParam(":login_name", $login_name);
+	$statement->bindParam(":name", $login_name);
 	$statement->bindParam(":password", $password);
+	
+
 	$statement->execute();
 
-	$fetch = $statement->fetch();
+		$fetch = $statement->fetch(PDO::FETCH_ASSOC);
+
 	print_r($fetch);
 	$name = $fetch['login_name'];
+	if($name != ""){
+		//set cookie
+		$cookie_name = "user";
+		$cookie_value = $name;
+		setcookie($cookie_name, $cookie_value, time() + (31104000 * 30), ); // 86400 = 1 day
+		//redirect 
+		header("Location:/misstais_shop/");
+		}
+	else{
 		
-	//set cookie
-	$cookie_name = "user";
-	$cookie_value = $name;
-	setcookie($cookie_name, $cookie_value, time() + (31104000 * 30), ); // 86400 = 1 day	
-
+	}	
+	
+	
+	
 }		
 
 	
 ?>
 
-<?php 
-if($_COOKIE["user"] != " " ){
- ?>
- 	<h3>Вы успешно авторизировались</h3> 
- 	<a href="/misstais_shop" > Перейти на главную </a>
- <?php } ?>
 
+
+ 
+<a href="registration.php"  ><h3>Регистрация</h3> </a>
+<script type="text/javascript">
+	document.getElementById("login_input").value = "";
+	document.getElementById("password_input").value = "";
+</script>
+</main>
 </body>
 </html>
