@@ -122,8 +122,9 @@ a{
 	//show comments for this item
 	
 	//print_r($current_photo);
-
-	
+	//amount of photos and colors
+	$size_of_photos = sizeof($photos);
+	$amount_of_sizes = sizeof($sizes);
 
 	$sql_get_comments ="SELECT * FROM comments INNER JOIN items ON comments.id_item = items.id WHERE items.id=".$var_id_of_item;
 	$statement_comments =  $pdo->prepare($sql_get_comments);
@@ -184,18 +185,23 @@ a{
 	<?php foreach($posts as $post): ?>
 		<div id="desc">
 		<p><?= $post["description"]?></p>
+		<?php if($size_of_photos != 0) { ?>	
 		<h3>Выберете цвет:</h3>
+	
 	<?php foreach($photos as $photo): ?>
 		
 	<br>
 	<a href="item.php?id=<?=$photo['item_id']?>&color=<?=$photo['name'] ?>&size=<?=$size_item?> "><img  src="images/<?= $photo["photo"];?>" width="50" height="50" ></a>
 	<?php endforeach; ?>
+	<?php }?>
+	<?php if($amount_of_sizes != 0) { ?>
  	<br>
  	<h3>Выберете размер:</h3>
 	<?php foreach($sizes as $size): ?>
 		<a href="item.php?id=<?=$size['id_item']?>&color=<?=$size['default_color'] ?>&size=<?=$size['size'] ?>"><?= $size["size"];?></a>
 
 	<?php endforeach; ?>
+	<?php } ?>
 		</div>
 	<?php endforeach; ?>
 	</div>
